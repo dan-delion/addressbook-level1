@@ -469,7 +469,12 @@ public class AddressBook {
      * @return set of keywords as specified by args
      */
     private static Set<String> extractKeywordsFromFindPersonArgs(String findPersonCommandArgs) {
-        return new HashSet<>(splitByWhitespace(findPersonCommandArgs.trim()));
+        final ArrayList<String> keywords = new ArrayList<>(splitByWhitespace(findPersonCommandArgs.trim()));
+        final HashSet<String> capitalizedKeywords = new HashSet<>();
+        for (String keyword : keywords) {
+            capitalizedKeywords.add(Character.toUpperCase(keyword.charAt(0)) + keyword.substring(1));
+        }
+        return capitalizedKeywords;
     }
 
     /**
